@@ -236,6 +236,7 @@ class ReactSuperSelect extends React.Component {
 
   // main render method
   render() {
+    console.log('Testing ReactSuperSelect component changes.');
     let caratClass = classNames('carat', {
           'down': !this.state.isOpen,
           'up': this.state.isOpen

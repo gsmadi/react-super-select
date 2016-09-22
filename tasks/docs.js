@@ -31,10 +31,10 @@ module.exports = function(gulp, config) {
   // Version Printer Component, leveraged by documentation pages
   var rssversion = JSON.parse(require('fs').readFileSync('./package.json')).version;
   var rssversionVar = 'var RSS_VERSION = \\"' + rssversion + '\\";';
-  var rssVersionShellCmd = 'echo "' + rssversionVar +'"|cat - ./scripts/support/version-printer-base.txt > ./tmp/version_tmp && mv ./tmp/version_tmp '+ config.documentation.version_printer;
+  var rssVersionShellCmd = 'echo "' + rssversionVar +'"|cat - ./scripts/support/version-printer-base.txt > ./version_tmp && mv ./version_tmp '+ config.documentation.version_printer;
 
   gulp.task('docs_add_version', function(cb) {
-    exec(rssVersionShellCmd, function (err, stdout, stderr) {
+    exec(rssVersionShellCmd,{ shell: '/bin/bash'}, function (err, stdout, stderr) {
       console.log(stdout);
       console.log(stderr);
       cb(err);
@@ -49,7 +49,7 @@ module.exports = function(gulp, config) {
     ].join(' && ');
 
   gulp.task('docs_annotate_source', function(cb) {
-    exec(doccoTasks, function (err, stdout, stderr) {
+    exec(doccoTasks, { shell: '/bin/bash'}, function (err, stdout, stderr) {
       console.log(stdout);
       console.log(stderr);
       cb(err);
