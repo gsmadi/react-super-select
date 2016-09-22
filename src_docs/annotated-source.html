@@ -519,6 +519,8 @@
             </div>
             
             <div class="content"><div class='highlight'><pre>  componentDidMount() {
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Testing ReactSuperSelect component changes.'</span>);
+    
     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.disabled) {
       <span class="hljs-keyword">return</span>;
     }
@@ -637,7 +639,6 @@ Reset some state defaults and dataSource related fields if dataSource changed.</
             </div>
             
             <div class="content"><div class='highlight'><pre>  render() {
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Testing ReactSuperSelect component changes.'</span>);
     <span class="hljs-keyword">let</span> caratClass = classNames(<span class="hljs-string">'carat'</span>, {
           <span class="hljs-string">'down'</span>: !<span class="hljs-keyword">this</span>.state.isOpen,
           <span class="hljs-string">'up'</span>: <span class="hljs-keyword">this</span>.state.isOpen
