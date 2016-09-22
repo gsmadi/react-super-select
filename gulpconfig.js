@@ -51,7 +51,7 @@ module.exports = {
       './src_docs/test-page-app.js'
     ],
     js_unbundled: [
-      './src_docs/scale.fix.js',
+      './src_docs/scale.fix.js'
     ],
     css: [
       './lib/react-super-select.css',
