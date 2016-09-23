@@ -270,31 +270,31 @@ class ReactSuperSelect extends React.Component {
     let RssBase = React.createClass({
       render: () => {
         return (
-          <div ref={(c) => {this._rssDOM.rssControl = c }} id={this.state.controlId} className={wrapClasses}>
-            <div ref={(c) => {this._rssDOM.triggerDiv = c }}
-               className={triggerClasses}
-               onClick={this.toggleDropdown}
-               onKeyDown={this._handleKeyDown}
-               role="combobox"
-               aria-activedescendant={this._ariaGetActiveDescendentId()}
-               aria-disabled={this.props.disabled}
-               aria-haspopup={true}
-               aria-controls={this._ariaGetListId()}
-               aria-label={placeholderString}
-               aria-multiselectable={this._isMultiSelect()}
-               tabIndex="0">
-                {triggerDisplayContent}
-                {clearSelectionButton}
-                <span ref={(c) => {this._rssDOM.carat = c }} className={caratClass}> </span>
-            </div>
-            {dropdownContent}
+          <div ref={(c) => {this._rssDOM.triggerDiv = c }}
+             className={triggerClasses}
+             onClick={this.toggleDropdown}
+             onKeyDown={this._handleKeyDown}
+             role="combobox"
+             aria-activedescendant={this._ariaGetActiveDescendentId()}
+             aria-disabled={this.props.disabled}
+             aria-haspopup={true}
+             aria-controls={this._ariaGetListId()}
+             aria-label={placeholderString}
+             aria-multiselectable={this._isMultiSelect()}
+             tabIndex="0">
+              {triggerDisplayContent}
+              {clearSelectionButton}
+              <span ref={(c) => {this._rssDOM.carat = c }} className={caratClass}> </span>
           </div>
         );
       }
     });
 
     return (
-      <RssBase key={"rss-base-001"}/>
+      <div ref={(c) => {this._rssDOM.rssControl = c }} id={this.state.controlId} className={wrapClasses}>
+        <RssBase key={"rss-base-001"}/>
+        {dropdownContent}
+      </div>
     );
   }
 
