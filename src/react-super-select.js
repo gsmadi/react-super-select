@@ -166,8 +166,6 @@ class ReactSuperSelect extends React.Component {
 
   // wire document click close control handler
   componentDidMount() {
-    console.log('Testing ReactSuperSelect component changes.');
-
     if (this.props.disabled) {
       return;
     }
@@ -269,26 +267,35 @@ class ReactSuperSelect extends React.Component {
                              </button>);
     }
 
+    let RssBase = React.createClass({
+      render: () => {
+        return (
+          <div ref={(c) => {this._rssDOM.triggerDiv = c }}
+             className={triggerClasses}
+             onClick={this.toggleDropdown}
+             onKeyDown={this._handleKeyDown}
+             role="combobox"
+             aria-activedescendant={this._ariaGetActiveDescendentId()}
+             aria-disabled={this.props.disabled}
+             aria-haspopup={true}
+             aria-controls={this._ariaGetListId()}
+             aria-label={placeholderString}
+             aria-multiselectable={this._isMultiSelect()}
+             tabIndex="0">
+              {triggerDisplayContent}
+              {clearSelectionButton}
+              <span ref={(c) => {this._rssDOM.carat = c }} className={caratClass}> </span>
+          </div>
+        );
+      }
+    });
+
     return (
       <div ref={(c) => {this._rssDOM.rssControl = c }} id={this.state.controlId} className={wrapClasses}>
-        <div ref={(c) => {this._rssDOM.triggerDiv = c }}
-           className={triggerClasses}
-           onClick={this.toggleDropdown}
-           onKeyDown={this._handleKeyDown}
-           role="combobox"
-           aria-activedescendant={this._ariaGetActiveDescendentId()}
-           aria-disabled={this.props.disabled}
-           aria-haspopup={true}
-           aria-controls={this._ariaGetListId()}
-           aria-label={placeholderString}
-           aria-multiselectable={this._isMultiSelect()}
-           tabIndex="0">
-            {triggerDisplayContent}
-            {clearSelectionButton}
-            <span ref={(c) => {this._rssDOM.carat = c }} className={caratClass}> </span>
-        </div>
+        <RssBase key={"rss-base-001"}/>
         {dropdownContent}
-      </div>);
+      </div>
+    );
   }
 
   // toggles the open-state of the dropdown
@@ -678,15 +685,15 @@ class ReactSuperSelect extends React.Component {
   // Render the selected options into the trigger element using the normal (i.e. non-tags) behavior.
   // Choose whether to render using the default template or a provided **customOptionTemplateFunction**
   _getNormalDisplayMarkup() {
-    return _.map(this.state.value, (value) => {
+    return _.map(this.state.value, (value, i) => {
       let selectedKey = "r_ss_selected_" + value[this.state.labelKey];
       if (this.props.customSelectedOptionTemplateFunction) {
         if (value.id != null) {
-          return this.props.customSelectedOptionTemplateFunction(value);
+          return this.props.customSelectedOptionTemplateFunction(value, i);
         }
       } else if (this.props.customOptionTemplateFunction) {
         if (value.id != null) {
-          return this.props.customOptionTemplateFunction(value);
+          return this.props.customOptionTemplateFunction(value, i);
         }
       }
       return (<span key={selectedKey} className="r-ss-selected-label">{value[this.state.labelKey]}</span>);
@@ -946,7 +953,7 @@ class ReactSuperSelect extends React.Component {
       const indexRef = 'option_' + index;
 
       let isCurrentlySelected = this._isCurrentlySelected(dataOption),
-          itemKey = "drop_li_" + dataOption[this.state.valueKey],
+          itemKey = "drop_li_" + index.toString(),
           ariaDescendantId = this.state.controlId + '_aria_' + indexRef,
           optionMarkup = _.isFunction(this.props.customOptionTemplateFunction) ? this.props.customOptionTemplateFunction(dataOption, this.state.searchString) : dataOption[this.state.labelKey],
           classes = classNames('r-ss-dropdown-option', {
