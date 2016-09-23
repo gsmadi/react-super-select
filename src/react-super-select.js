@@ -1244,7 +1244,7 @@ class ReactSuperSelect extends React.Component {
       objectValues = this.state.value.concat(objectValues);
     } else {
       if (value != null) {
-        uniSelect = [_lodash2.default.head(objectValues)];
+        uniSelect = [_.head(objectValues)];
       } else {
         uniSelect = [];
       }
