@@ -166,8 +166,6 @@ class ReactSuperSelect extends React.Component {
 
   // wire document click close control handler
   componentDidMount() {
-    console.log('Testing ReactSuperSelect component changes.');
-
     if (this.props.disabled) {
       return;
     }
@@ -946,7 +944,7 @@ class ReactSuperSelect extends React.Component {
       const indexRef = 'option_' + index;
 
       let isCurrentlySelected = this._isCurrentlySelected(dataOption),
-          itemKey = "drop_li_" + dataOption[this.state.valueKey],
+          itemKey = "drop_li_" + index.toString(),
           ariaDescendantId = this.state.controlId + '_aria_' + indexRef,
           optionMarkup = _.isFunction(this.props.customOptionTemplateFunction) ? this.props.customOptionTemplateFunction(dataOption, this.state.searchString) : dataOption[this.state.labelKey],
           classes = classNames('r-ss-dropdown-option', {

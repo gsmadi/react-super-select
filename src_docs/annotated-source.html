@@ -519,8 +519,6 @@
             </div>
             
             <div class="content"><div class='highlight'><pre>  componentDidMount() {
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Testing ReactSuperSelect component changes.'</span>);
-
     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.disabled) {
       <span class="hljs-keyword">return</span>;
     }
@@ -1947,7 +1945,7 @@ Leverage the <strong>customOptionTemplateFunction</strong> function if provided<
       <span class="hljs-keyword">const</span> indexRef = <span class="hljs-string">'option_'</span> + index;
 
       <span class="hljs-keyword">let</span> isCurrentlySelected = <span class="hljs-keyword">this</span>._isCurrentlySelected(dataOption),
-          itemKey = <span class="hljs-string">"drop_li_"</span> + dataOption[<span class="hljs-keyword">this</span>.state.valueKey],
+          itemKey = <span class="hljs-string">"drop_li_"</span> + index.toString(),
           ariaDescendantId = <span class="hljs-keyword">this</span>.state.controlId + <span class="hljs-string">'_aria_'</span> + indexRef,
           optionMarkup = _.isFunction(<span class="hljs-keyword">this</span>.props.customOptionTemplateFunction) ? <span class="hljs-keyword">this</span>.props.customOptionTemplateFunction(dataOption, <span class="hljs-keyword">this</span>.state.searchString) : dataOption[<span class="hljs-keyword">this</span>.state.labelKey],
           classes = classNames(<span class="hljs-string">'r-ss-dropdown-option'</span>, {
