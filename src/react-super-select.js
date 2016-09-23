@@ -167,7 +167,7 @@ class ReactSuperSelect extends React.Component {
   // wire document click close control handler
   componentDidMount() {
     console.log('Testing ReactSuperSelect component changes.');
-    
+
     if (this.props.disabled) {
       return;
     }
@@ -680,7 +680,11 @@ class ReactSuperSelect extends React.Component {
   _getNormalDisplayMarkup() {
     return _.map(this.state.value, (value) => {
       let selectedKey = "r_ss_selected_" + value[this.state.labelKey];
-      if (this.props.customOptionTemplateFunction) {
+      if (this.props.customSelectedOptionTemplateFunction) {
+        if (value.id != null) {
+          return this.props.customSelectedOptionTemplateFunction(value);
+        }
+      } else if (this.props.customOptionTemplateFunction) {
         if (value.id != null) {
           return this.props.customOptionTemplateFunction(value);
         }

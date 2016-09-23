@@ -520,7 +520,7 @@
             
             <div class="content"><div class='highlight'><pre>  componentDidMount() {
     <span class="hljs-built_in">console</span>.log(<span class="hljs-string">'Testing ReactSuperSelect component changes.'</span>);
-    
+
     <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.disabled) {
       <span class="hljs-keyword">return</span>;
     }
@@ -1454,7 +1454,11 @@ Choose whether to render using the default template or a provided <strong>custom
             <div class="content"><div class='highlight'><pre>  _getNormalDisplayMarkup() {
     <span class="hljs-keyword">return</span> _.map(<span class="hljs-keyword">this</span>.state.value, (value) =&gt; {
       <span class="hljs-keyword">let</span> selectedKey = <span class="hljs-string">"r_ss_selected_"</span> + value[<span class="hljs-keyword">this</span>.state.labelKey];
-      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.customOptionTemplateFunction) {
+      <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.customSelectedOptionTemplateFunction) {
+        <span class="hljs-keyword">if</span> (value.id != <span class="hljs-literal">null</span>) {
+          <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.props.customSelectedOptionTemplateFunction(value);
+        }
+      } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props.customOptionTemplateFunction) {
         <span class="hljs-keyword">if</span> (value.id != <span class="hljs-literal">null</span>) {
           <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.props.customOptionTemplateFunction(value);
         }
