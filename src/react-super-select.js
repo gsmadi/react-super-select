@@ -166,6 +166,8 @@ class ReactSuperSelect extends React.Component {
 
   // wire document click close control handler
   componentDidMount() {
+    console.log('Testing ReactSuperSelect component changes.');
+
     if (this.props.disabled) {
       return;
     }
@@ -678,8 +680,14 @@ class ReactSuperSelect extends React.Component {
   _getNormalDisplayMarkup() {
     return _.map(this.state.value, (value) => {
       let selectedKey = "r_ss_selected_" + value[this.state.labelKey];
-      if (this.props.customOptionTemplateFunction) {
-        return this.props.customOptionTemplateFunction(value);
+      if (this.props.customSelectedOptionTemplateFunction) {
+        if (value.id != null) {
+          return this.props.customSelectedOptionTemplateFunction(value);
+        }
+      } else if (this.props.customOptionTemplateFunction) {
+        if (value.id != null) {
+          return this.props.customOptionTemplateFunction(value);
+        }
       }
       return (<span key={selectedKey} className="r-ss-selected-label">{value[this.state.labelKey]}</span>);
     });
@@ -1230,13 +1238,20 @@ class ReactSuperSelect extends React.Component {
   // Close dropdown on the setState callback if not a non control-closing selection
   _selectItemByValues(value, keepControlOpen) {
    let objectValues = this._findArrayOfOptionDataObjectsByValue(value);
+   var uniSelect;
 
-    if (this._isMultiSelect() || (keepControlOpen && this.state.value)) {
+    if (this._isMultiSelect() || keepControlOpen && this.state.value) {
       objectValues = this.state.value.concat(objectValues);
+    } else {
+      if (value != null) {
+        uniSelect = [_.head(objectValues)];
+      } else {
+        uniSelect = [];
+      }
     }
 
     const newState = {
-      value: this._isMultiSelect() ? objectValues : [_.head(objectValues)]
+      value: this._isMultiSelect() ? objectValues : uniSelect
     };
 
     if (this.props.searchable && this.props.clearSearchOnSelection) {
@@ -1262,8 +1277,10 @@ class ReactSuperSelect extends React.Component {
     const keepControlOpen = (this._isMultiSelect() && (event.ctrlKey || event.metaKey)),
           alreadySelected = this.SELECTED_OPTION_REGEX.test(event.currentTarget.getAttribute('class'));
 
-    // store clicked option as the lastUserSelected
-    this.lastUserSelectedOption = event.currentTarget;
+    // store clicked option as the lastUserSelected unless default selection
+    if (value.id != null)  {
+      this.lastUserSelectedOption = event.currentTarget;
+    }
 
     if (alreadySelected) {
       this._removeSelectedOptionByValue(value);

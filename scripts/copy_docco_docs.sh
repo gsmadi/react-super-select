@@ -1,4 +1,4 @@
-#! /usr/bin/env sh
+#!/bin/bash
 
 echo 'copying docco css from docs/docco.css to src_docs/stylesheets/docco.css'
 cp ./docs/docco.css ./src_docs/stylesheets/docco.css
