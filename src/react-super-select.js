@@ -268,9 +268,9 @@ class ReactSuperSelect extends React.Component {
     }
 
     return (
-      <div ref={(c) => {this._rssDOM.rssControl = c }} id={this.state.controlId} className={wrapClasses}>
+      <div ref={(c) => {this._rssDOM.rssControl = c }} key={this.state.controlId} id={this.state.controlId} className={wrapClasses}>
         <div ref={(c) => {this._rssDOM.triggerDiv = c }}
-           key={this.state.controlId}
+           key={this.state.controlId + 1}
            className={triggerClasses}
            onClick={this.toggleDropdown}
            onKeyDown={this._handleKeyDown}
