@@ -671,6 +671,7 @@ Reset some state defaults and dataSource related fields if dataSource changed.</
     <span class="hljs-keyword">return</span> (
       <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">{(c)</span> =&gt;</span> {this._rssDOM.rssControl = c }} id={this.state.controlId} className={wrapClasses}&gt;
         <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">{(c)</span> =&gt;</span> {this._rssDOM.triggerDiv = c }}
+           key={this.state.controlId}
            className={triggerClasses}
            onClick={this.toggleDropdown}
            onKeyDown={this._handleKeyDown}
