@@ -668,28 +668,38 @@ Reset some state defaults and dataSource related fields if dataSource changed.</
                              <span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span>);
     }
 
+    <span class="hljs-keyword">let</span> RssBase = React.createClass({
+      <span class="hljs-attr">render</span>: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+        <span class="hljs-keyword">return</span> (
+          <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">{(c)</span> =&gt;</span> {this._rssDOM.rssControl = c }} id={this.state.controlId} className={wrapClasses}&gt;
+            <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">{(c)</span> =&gt;</span> {this._rssDOM.triggerDiv = c }}
+               className={triggerClasses}
+               onClick={this.toggleDropdown}
+               onKeyDown={this._handleKeyDown}
+               role="combobox"
+               aria-activedescendant={this._ariaGetActiveDescendentId()}
+               aria-disabled={this.props.disabled}
+               aria-haspopup={true}
+               aria-controls={this._ariaGetListId()}
+               aria-label={placeholderString}
+               aria-multiselectable={this._isMultiSelect()}
+               tabIndex="0"&gt;
+                {triggerDisplayContent}
+                {clearSelectionButton}
+                <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">{(c)</span> =&gt;</span> {this._rssDOM.carat = c }} className={caratClass}&gt; <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+            <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+            {dropdownContent}
+          <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
+        );
+      }
+    });
+
     <span class="hljs-keyword">return</span> (
-      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">{(c)</span> =&gt;</span> {this._rssDOM.rssControl = c }} key={this.state.controlId} id={this.state.controlId} className={wrapClasses}&gt;
-        <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">{(c)</span> =&gt;</span> {this._rssDOM.triggerDiv = c }}
-           key={this.state.controlId + 1}
-           className={triggerClasses}
-           onClick={this.toggleDropdown}
-           onKeyDown={this._handleKeyDown}
-           role="combobox"
-           aria-activedescendant={this._ariaGetActiveDescendentId()}
-           aria-disabled={this.props.disabled}
-           aria-haspopup={true}
-           aria-controls={this._ariaGetListId()}
-           aria-label={placeholderString}
-           aria-multiselectable={this._isMultiSelect()}
-           tabIndex="0"&gt;
-            {triggerDisplayContent}
-            {clearSelectionButton}
-            <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">{(c)</span> =&gt;</span> {this._rssDOM.carat = c }} className={caratClass}&gt; <span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
-        <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-        {dropdownContent}
-      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>);
-  }</pre></div></div>
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">RssBase</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{</span>"<span class="hljs-attr">rss-base-001</span>"}/&gt;</span>
+    );
+  }
+
+</span></pre></div></div>
             
         </li>
         

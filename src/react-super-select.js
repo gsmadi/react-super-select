@@ -267,27 +267,35 @@ class ReactSuperSelect extends React.Component {
                              </button>);
     }
 
+    let RssBase = React.createClass({
+      render: () => {
+        return (
+          <div ref={(c) => {this._rssDOM.rssControl = c }} id={this.state.controlId} className={wrapClasses}>
+            <div ref={(c) => {this._rssDOM.triggerDiv = c }}
+               className={triggerClasses}
+               onClick={this.toggleDropdown}
+               onKeyDown={this._handleKeyDown}
+               role="combobox"
+               aria-activedescendant={this._ariaGetActiveDescendentId()}
+               aria-disabled={this.props.disabled}
+               aria-haspopup={true}
+               aria-controls={this._ariaGetListId()}
+               aria-label={placeholderString}
+               aria-multiselectable={this._isMultiSelect()}
+               tabIndex="0">
+                {triggerDisplayContent}
+                {clearSelectionButton}
+                <span ref={(c) => {this._rssDOM.carat = c }} className={caratClass}> </span>
+            </div>
+            {dropdownContent}
+          </div>
+        );
+      }
+    });
+
     return (
-      <div ref={(c) => {this._rssDOM.rssControl = c }} key={this.state.controlId} id={this.state.controlId} className={wrapClasses}>
-        <div ref={(c) => {this._rssDOM.triggerDiv = c }}
-           key={this.state.controlId + 1}
-           className={triggerClasses}
-           onClick={this.toggleDropdown}
-           onKeyDown={this._handleKeyDown}
-           role="combobox"
-           aria-activedescendant={this._ariaGetActiveDescendentId()}
-           aria-disabled={this.props.disabled}
-           aria-haspopup={true}
-           aria-controls={this._ariaGetListId()}
-           aria-label={placeholderString}
-           aria-multiselectable={this._isMultiSelect()}
-           tabIndex="0">
-            {triggerDisplayContent}
-            {clearSelectionButton}
-            <span ref={(c) => {this._rssDOM.carat = c }} className={caratClass}> </span>
-        </div>
-        {dropdownContent}
-      </div>);
+      <RssBase key={"rss-base-001"}/>
+    );
   }
 
   // toggles the open-state of the dropdown
